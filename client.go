@@ -11,9 +11,17 @@ type Client interface {
 	// 调起支付
 	UnionOrder(*eto.UnionOrderReq) (*eto.UnionOrderRes, error)
 	// 支付回调
-	ParseUnionOrderNotify(body string) (*eto.UnionOrderNotify, error)
+	ParseUnionOrderNotify(body []byte) (*eto.UnionOrderNotify, error)
 	// 回调响应
-	NotifyResponse() string
+	NotifyResponse(error) (string, error)
+	// 取消核销
+	SyncOrderStatus(*eto.SyncOrderStatusReq) error
+	// 申请退款
+	ApplyOrderRefund(*eto.ApplyOrderRefundReq) (*eto.ApplyOrderRefundResp, error)
+	// 退款回调
+	ParseRefundNotify(body []byte) (*eto.RefundNotify, error)
+	// 请求业务方退款审核
+	ParseRefundAudit(body []byte) (*eto.OrderRefundAuditNotify, error)
 }
 
 type baiduPayConfig struct {

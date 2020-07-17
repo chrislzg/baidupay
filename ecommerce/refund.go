@@ -67,3 +67,12 @@ func (c *PayClient) ParseRefundNotify(body []byte) (*eto.RefundNotify, error) {
 	}
 	return res, nil
 }
+
+func (c *PayClient) ParseRefundAudit(body []byte) (*eto.OrderRefundAuditNotify, error) {
+	res := &eto.OrderRefundAuditNotify{}
+	err := c.ParseNotify(body, res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
