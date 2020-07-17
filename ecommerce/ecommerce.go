@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"baidupay/core"
-	"baidupay/eto"
+	"github/chrislzg/baidupay/core"
+	"github/chrislzg/baidupay/eto"
 )
 
 type PayClient struct {
