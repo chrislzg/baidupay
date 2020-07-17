@@ -36,12 +36,7 @@ type baiduPayConfig struct {
 	IsDefault     bool     `json:"default"` // 是否是默认客户端
 }
 
-func NewClient(confStr json.RawMessage) (Client, error) {
-	conf := &baiduPayConfig{}
-	err := json.Unmarshal(confStr, conf)
-	if err != nil {
-		return nil, err
-	}
+func NewClient(conf *baiduPayConfig) (Client, error) {
 	c := &ecommerce.PayClient{
 		DealID:     conf.DealID,
 		AppID:      conf.AppID,
