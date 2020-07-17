@@ -1,8 +1,6 @@
 package baidupay
 
 import (
-	"encoding/json"
-
 	"github.com/chrislzg/baidupay/ecommerce"
 	"github.com/chrislzg/baidupay/eto"
 )
@@ -25,11 +23,11 @@ type Client interface {
 }
 
 type PayConfig struct {
-	DealID     string          `json:"deal_id"`
-	AppID      string          `json:"app_id"`
-	AppKey     string          `json:"app_key"`
-	PrivateKey json.RawMessage `json:"private_key"`
-	PublicKey  json.RawMessage `json:"Public_key"`
+	DealID     string `json:"deal_id"`
+	AppID      string `json:"app_id"`
+	AppKey     string `json:"app_key"`
+	PrivateKey []byte `json:"private_key"`
+	PublicKey  []byte `json:"Public_key"`
 
 	WhiteClientIP []string `json:"white_client_ip"`
 	DebugMode     bool     `json:"debug_mode"`
