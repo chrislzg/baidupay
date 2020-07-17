@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github/chrislzg/baidupay/core"
-	"github/chrislzg/baidupay/eto"
+	"github.com/chrislzg/baidupay/core"
+	"github.com/chrislzg/baidupay/eto"
 )
 
 func (c *PayClient) NotifyResponse(err error) (string, error) {

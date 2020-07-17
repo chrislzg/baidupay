@@ -3,8 +3,8 @@ package ecommerce
 import (
 	"encoding/json"
 
-	"github/chrislzg/baidupay/core"
-	"github/chrislzg/baidupay/eto"
+	"github.com/chrislzg/baidupay/core"
+	"github.com/chrislzg/baidupay/eto"
 )
 
 func (c *PayClient) UnionOrder(req *eto.UnionOrderReq) (*eto.UnionOrderRes, error) {

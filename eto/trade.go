@@ -3,7 +3,7 @@ package eto
 import (
 	"net/url"
 
-	"github/chrislzg/baidupay/core"
+	"github.com/chrislzg/baidupay/core"
 )
 
 // https://dianshang.baidu.com/platform/doclist/index.html#!/doc/nuomiplus_1_guide/mini_program_cashier/parameter.md

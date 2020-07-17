@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github/chrislzg/baidupay/core"
-	"github/chrislzg/baidupay/eto"
+	"github.com/chrislzg/baidupay/core"
+	"github.com/chrislzg/baidupay/eto"
 )
 
 func (c *PayClient) SyncOrderStatus(req *eto.SyncOrderStatusReq) error {

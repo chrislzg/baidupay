@@ -3,8 +3,8 @@ package baidupay
 import (
 	"encoding/json"
 
-	"github/chrislzg/baidupay/ecommerce"
-	"github/chrislzg/baidupay/eto"
+	"github.com/chrislzg/baidupay/ecommerce"
+	"github.com/chrislzg/baidupay/eto"
 )
 
 type Client interface {
