@@ -24,7 +24,7 @@ type Client interface {
 	ParseRefundAudit(body []byte) (*eto.OrderRefundAuditNotify, error)
 }
 
-type baiduPayConfig struct {
+type BaiduPayConfig struct {
 	DealID     string          `json:"deal_id"`
 	AppID      string          `json:"app_id"`
 	AppKey     string          `json:"app_key"`
@@ -36,7 +36,7 @@ type baiduPayConfig struct {
 	IsDefault     bool     `json:"default"` // 是否是默认客户端
 }
 
-func NewClient(conf *baiduPayConfig) (Client, error) {
+func NewClient(conf *BaiduPayConfig) (Client, error) {
 	c := &ecommerce.PayClient{
 		DealID:     conf.DealID,
 		AppID:      conf.AppID,
