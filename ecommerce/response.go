@@ -9,7 +9,30 @@ import (
 )
 
 func (c *PayClient) NotifyResponse(err error) (string, error) {
-	baseResponse := &eto.BaseResponse{}
+	baseResponse := &eto.BaseResponse{
+		Errno: 0,
+		Msg:   "success",
+	}
+	if err != nil {
+		baseResponse = &eto.BaseResponse{
+			Errno: 1,
+			Msg:   err.Error(),
+		}
+	}
+
+	res, e := json.Marshal(baseResponse)
+	if e != nil {
+		return "", e
+	}
+	return string(res), nil
+}
+
+func (c *PayClient) PayNotifyResponse(err error) (string, error) {
+	baseResponse := &eto.BaseResponse{
+		Errno: 0,
+		Msg:   "success",
+		Data:  json.RawMessage(`{"isConsumed": 2}`),
+	}
 	if err != nil {
 		baseResponse = &eto.BaseResponse{
 			Errno: 1,
