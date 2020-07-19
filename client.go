@@ -20,6 +20,8 @@ type Client interface {
 	ParseRefundNotify(body []byte) (*eto.RefundNotify, error)
 	// 请求业务方退款审核
 	ParseRefundAudit(body []byte) (*eto.OrderRefundAuditNotify, error)
+	// 支付回调响应
+	PayNotifyResponse(err error) (string, error)
 }
 
 type PayConfig struct {
