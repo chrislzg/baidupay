@@ -11,10 +11,10 @@ func (c *PayClient) UnionOrder(req *eto.UnionOrderReq) (*eto.UnionOrderRes, erro
 	res := &eto.UnionOrderRes{
 		DealID:          c.DealID,
 		AppKey:          c.AppKey,
-		TotalAmount:     req.Amount,
-		DealTitle:       req.ProductName,
+		TotalAmount:     req.TotalAmount,
+		DealTitle:       req.DealTitle,
 		SignFieldsRange: core.SignFieldsRangeTypeAmount,
-		TpOrderID:       req.OrderID,
+		TpOrderID:       req.TpOrderID,
 	}
 
 	cipherText, err := core.Sign(res, c.PrivateKey)
@@ -27,9 +27,9 @@ func (c *PayClient) UnionOrder(req *eto.UnionOrderReq) (*eto.UnionOrderRes, erro
 			AppKey:      c.AppKey,
 			DealID:      c.DealID,
 			RsaSign:     cipherText,
-			TpOrderID:   req.OrderID,
-			TotalAmount: req.Amount,
-			ReturnData:  req.Attach,
+			TpOrderID:   req.TpOrderID,
+			TotalAmount: req.TotalAmount,
+			ReturnData:  req.ReturnData,
 			DealTitle:   res.DealTitle,
 		},
 	}

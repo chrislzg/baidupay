@@ -11,7 +11,6 @@ import (
 
 type PayClient struct {
 	DealID     string
-	AppID      string
 	AppKey     string
 	PrivateKey []byte
 	PublicKey  []byte

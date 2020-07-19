@@ -8,11 +8,10 @@ import (
 
 // https://dianshang.baidu.com/platform/doclist/index.html#!/doc/nuomiplus_1_guide/mini_program_cashier/parameter.md
 type UnionOrderReq struct {
-	Amount      string // 订单总金额，以分为单位
-	OrderID     string
-	ProductName string
-	ProductDesc string
-	Attach      string
+	TotalAmount string // 订单总金额，以分为单位
+	TpOrderID   string
+	DealTitle   string
+	ReturnData  string
 }
 
 /*

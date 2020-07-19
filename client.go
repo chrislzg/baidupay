@@ -37,7 +37,6 @@ type PayConfig struct {
 func NewClient(conf *PayConfig) (Client, error) {
 	c := &ecommerce.PayClient{
 		DealID:     conf.DealID,
-		AppID:      conf.AppID,
 		AppKey:     conf.AppKey,
 		PrivateKey: conf.PrivateKey,
 		PublicKey:  conf.PublicKey,
