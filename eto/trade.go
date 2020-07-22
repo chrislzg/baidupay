@@ -32,7 +32,7 @@ type UnionOrderRes struct {
 	DealID          string                   `json:"dealId"`
 	AppKey          string                   `json:"appKey"`
 	TotalAmount     string                   `json:"totalAmount"` // 订单总金额，以分为单位
-	TpOrderID       string                   `json:"tpOrderID"`
+	TpOrderID       string                   `json:"tpOrderId"`
 	SignFieldsRange core.SignFieldsRangeType `json:"signFieldsRange"`
 	DealTitle       string                   `json:"dealTitle"` // 订单的名称
 	RsaSign         string                   `json:"rsaSign"`
