@@ -1,11 +1,11 @@
 package ecommerce
 
 import (
-	"encoding/json"
-	"net/url"
+    "encoding/json"
+    "net/url"
 
-	"github.com/chrislzg/baidupay/core"
-	"github.com/chrislzg/baidupay/eto"
+    "github.com/chrislzg/baidupay/core"
+    "github.com/chrislzg/baidupay/eto"
 )
 
 func (c *PayClient) NotifyResponse(err error) (string, error) {
@@ -70,25 +70,27 @@ func (c *PayClient) VerifyNotify(body []byte) error {
 	return core.CheckSign(plainString, sign, c.PublicKey)
 }
 
+func(c *PayClient) parseGetCallBack(res eto.CallbackModel, body string) error {
+    s, err := url.QueryUnescape(body)
+    if err != nil {
+        return err
+    }
+    qs, err := url.ParseQuery(s)
+    if err == nil {
+        res.Filled(qs)
+    }
+
+    if !c.validCallback(qs) {
+        return core.ErrorInvalidSign
+    }
+    return nil
+}
+
 // 解析回调通知内容，res必须为指针类型
-func (c *PayClient) ParseNotify(body []byte, res interface{}) error {
-	if err := c.VerifyNotify(body); err != nil {
-		return err
-	}
-	baseResponse := &eto.BaseResponse{}
-	err := json.Unmarshal(body, baseResponse)
-	if err != nil {
-		return err
-	}
-	if baseResponse.Errno != 0 {
-		return &core.ResponseErr{
-			ErrNo: baseResponse.Errno,
-			Msg:   baseResponse.Msg,
-		}
-	}
-	err = json.Unmarshal(baseResponse.Data, res)
-	if err != nil {
-		return err
-	}
-	return nil
+func (c *PayClient) ParseNotify(body []byte, res eto.CallbackModel) error {
+   err := c.parseGetCallBack(res, string(body))
+    if err != nil {
+        return err
+    }
+    return nil
 }

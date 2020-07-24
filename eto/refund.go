@@ -1,5 +1,7 @@
 package eto
 
+import "net/url"
+
 type SyncOrderStatusReq struct {
 	OrderId int32  `json:"orderId"`
 	UserId  int32  `json:"userId"`
@@ -47,6 +49,7 @@ type ApplyOrderRefundResp struct {
 	RefundPayMoney string `json:"refund_pay_money"`
 }
 
+/*
 type OrderRefundAuditNotify struct {
 	OrderId          int64  `json:"orderId"`
 	UserId           int64  `json:"userId"`
@@ -54,6 +57,25 @@ type OrderRefundAuditNotify struct {
 	RefundBatchId    string `json:"refundBatchId"`
 	ApplyRefundMoney int32  `json:"applyRefundMoney"`
 	RsaSign          string `json:"rsaSign"`
+}
+*/
+type OrderRefundAuditNotify struct {
+	OrderId          string `json:"orderId"`
+	UserId           string `json:"userId"`
+	TpOrderId        string `json:"tpOrderId"`
+	RefundBatchId    string `json:"refundBatchId"`
+	ApplyRefundMoney string `json:"applyRefundMoney"`
+	RsaSign          string `json:"rsaSign"`
+}
+
+// 通过 values 填充自己
+func (res *OrderRefundAuditNotify) Filled(values url.Values) {
+    res.OrderId = values.Get("orderId")
+    res.UserId = values.Get("userId")
+    res.TpOrderId = values.Get("tpOrderId")
+    res.RefundBatchId = values.Get("refundBatchId")
+    res.ApplyRefundMoney = values.Get("applyRefundMoney")
+    res.RsaSign = values.Get("rsaSign")
 }
 
 type AuditStatus int32
@@ -82,6 +104,7 @@ const (
 	RefundFail
 )
 
+/*
 type RefundNotify struct {
 	UserId        int64        `json:"userId"`
 	OrderId       int64        `json:"orderId"`
@@ -89,6 +112,25 @@ type RefundNotify struct {
 	RefundBatchId string       `json:"refundBatchId"`
 	RefundStatus  RefundStatus `json:"refundStatus"`
 	RsaSign       string       `json:"rsaSign"`
+}
+*/
+type RefundNotify struct {
+    UserId        string `json:"userId"`
+    OrderId       string `json:"orderId"`
+    TpOrderId     string `json:"tpOrderId"`
+    RefundBatchId string `json:"refundBatchId"`
+    RefundStatus  string `json:"refundStatus"`
+    RsaSign       string `json:"rsaSign"`
+}
+
+// 通过 values 填充自己
+func (res *RefundNotify) Filled(values url.Values) {
+    res.UserId = values.Get("userId")
+    res.OrderId = values.Get("orderId")
+    res.TpOrderId = values.Get("tpOrderId")
+    res.RefundBatchId = values.Get("refundBatchId")
+    res.RefundStatus = values.Get("refundStatus")
+    res.RsaSign = values.Get("rsaSign")
 }
 
 //
