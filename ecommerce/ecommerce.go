@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 
 	"github.com/chrislzg/baidupay/core"
 	"github.com/chrislzg/baidupay/eto"
@@ -27,16 +28,16 @@ type PayClient struct {
 func (c *PayClient) RequestApi() {
 
 }
-func (c *PayClient) doRequest(requestData interface{}, url core.ApiUrl, httpMethod string) ([]byte, error) {
-	var data []byte
+
+// baidu form
+var postFormContentType = "application/x-www-form-urlencoded"
+
+func (c *PayClient) doRequestPostForm(requestData core.SignatureStruct, iUrl core.ApiUrl) ([]byte, error) {
+	var data url.Values
 	if requestData != nil {
-		var err error
-		data, err = json.Marshal(requestData)
-		if err != nil {
-			return nil, err
-		}
+		data = requestData.FieldForm()
 	}
-	resp, err := core.SimpleRequest(c.httpClient, string(url), httpMethod, data)
+	resp, err := core.SimpleRequest(c.httpClient, string(iUrl), http.MethodPost, map[string]string{"Content-Type": postFormContentType}, []byte(data.Encode()))
 	if err != nil {
 		return nil, err
 	}

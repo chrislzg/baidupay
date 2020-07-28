@@ -10,6 +10,10 @@ const (
 
 type ApiUrl string
 
+func (c ApiUrl) String() string {
+	return string(c)
+}
+
 const (
 	SyncOrderStatusUrl  ApiUrl = "https://etrade-api.baidu.com/cashier/syncOrderStatus"
 	ApplyOrderRefundUrl ApiUrl = "https://etrade-api.baidu.com/cashier/applyOrderRefund"

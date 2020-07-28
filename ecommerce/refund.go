@@ -2,7 +2,6 @@ package ecommerce
 
 import (
 	"encoding/json"
-	"net/http"
 
 	"github.com/chrislzg/baidupay/core"
 	"github.com/chrislzg/baidupay/eto"
@@ -13,7 +12,7 @@ func (c *PayClient) SyncOrderStatus(req *eto.SyncOrderStatusReq) error {
 	if err != nil {
 		return err
 	}
-	_, err = c.doRequest(req, core.SyncOrderStatusUrl, http.MethodPost)
+	_, err = c.doRequestPostForm(req, core.SyncOrderStatusUrl)
 	if err != nil {
 		return err
 	}
@@ -36,7 +35,7 @@ func (c *PayClient) ApplyOrderRefund(req *eto.ApplyOrderRefundReq) (*eto.ApplyOr
 	if err != nil {
 		return nil, err
 	}
-	httpResponse, err := c.doRequest(req, core.ApplyOrderRefundUrl, http.MethodPost)
+	httpResponse, err := c.doRequestPostForm(req, core.ApplyOrderRefundUrl)
 	if err != nil {
 		return nil, err
 	}
