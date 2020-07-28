@@ -12,5 +12,5 @@ type CallbackModel interface {
 type BaseResponse struct {
 	Errno int32           `json:"errno"`
 	Msg   string          `json:"msg"`
-	Data  json.RawMessage `json:"data"`
+	Data  json.RawMessage `json:"data,omitempty"`
 }

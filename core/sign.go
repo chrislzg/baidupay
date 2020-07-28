@@ -19,6 +19,7 @@ var ErrBadPem = errors.New("decode pem failed")
 
 type SignatureStruct interface {
 	FieldMap() map[string]interface{}
+	FieldForm() url.Values
 }
 
 // RSA 算法：

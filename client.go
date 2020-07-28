@@ -29,7 +29,7 @@ type PayConfig struct {
 	AppID      string `json:"app_id"`
 	AppKey     string `json:"app_key"`
 	PrivateKey []byte `json:"private_key"`
-	PublicKey  []byte `json:"Public_key"`
+	PublicKey  []byte `json:"public_key"`
 
 	WhiteClientIP []string `json:"white_client_ip"`
 	DebugMode     bool     `json:"debug_mode"`

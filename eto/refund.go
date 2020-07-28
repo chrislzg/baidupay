@@ -1,13 +1,16 @@
 package eto
 
-import "net/url"
+import (
+	"fmt"
+	"net/url"
+)
 
 type SyncOrderStatusReq struct {
-	OrderId int32  `json:"orderId"`
-	UserId  int32  `json:"userId"`
+	OrderId int64  `json:"orderId"`
+	UserId  int64  `json:"userId"`
 	Type    int32  `json:"type"` // 固定值3
-	AppKey  string `json:"app_key"`
-	RsaSign string `json:"rsa_sign"`
+	AppKey  string `json:"appKey"`
+	RsaSign string `json:"rsaSign"`
 }
 
 func (m *SyncOrderStatusReq) FieldMap() map[string]interface{} {
@@ -19,16 +22,26 @@ func (m *SyncOrderStatusReq) FieldMap() map[string]interface{} {
 	}
 }
 
+func (m *SyncOrderStatusReq) FieldForm() url.Values {
+	values := url.Values{}
+	fieldMap := m.FieldMap()
+	for key := range fieldMap {
+		values.Add(key, fmt.Sprint(fieldMap[key]))
+	}
+	values.Add("rsaSign", m.RsaSign)
+	return values
+}
+
 type ApplyOrderRefundReq struct {
 	OrderId          int64  `json:"orderId"`
 	UserId           int64  `json:"userId"`
 	RefundType       int32  `json:"refundType"`
 	RefundReason     string `json:"refundReason"`
 	TpOrderId        string `json:"tpOrderId"`
-	ApplyRefundMoney string `json:"applyRefundMoney"`
+	ApplyRefundMoney int64  `json:"applyRefundMoney"`
 	BizRefundBatchId string `json:"bizRefundBatchId"`
-	AppKey           string `json:"app_key"`
-	RsaSign          string `json:"rsa_sign"`
+	AppKey           string `json:"appKey"`
+	RsaSign          string `json:"rsaSign"`
 }
 
 func (m *ApplyOrderRefundReq) FieldMap() map[string]interface{} {
@@ -42,6 +55,16 @@ func (m *ApplyOrderRefundReq) FieldMap() map[string]interface{} {
 		"bizRefundBatchId": m.BizRefundBatchId,
 		"appKey":           m.AppKey,
 	}
+}
+
+func (m *ApplyOrderRefundReq) FieldForm() url.Values {
+	values := url.Values{}
+	fieldMap := m.FieldMap()
+	for key := range fieldMap {
+		values.Add(key, fmt.Sprint(fieldMap[key]))
+	}
+	values.Add("rsaSign", m.RsaSign)
+	return values
 }
 
 type ApplyOrderRefundResp struct {
@@ -70,12 +93,12 @@ type OrderRefundAuditNotify struct {
 
 // 通过 values 填充自己
 func (res *OrderRefundAuditNotify) Filled(values url.Values) {
-    res.OrderId = values.Get("orderId")
-    res.UserId = values.Get("userId")
-    res.TpOrderId = values.Get("tpOrderId")
-    res.RefundBatchId = values.Get("refundBatchId")
-    res.ApplyRefundMoney = values.Get("applyRefundMoney")
-    res.RsaSign = values.Get("rsaSign")
+	res.OrderId = values.Get("orderId")
+	res.UserId = values.Get("userId")
+	res.TpOrderId = values.Get("tpOrderId")
+	res.RefundBatchId = values.Get("refundBatchId")
+	res.ApplyRefundMoney = values.Get("applyRefundMoney")
+	res.RsaSign = values.Get("rsaSign")
 }
 
 type AuditStatus int32
@@ -115,22 +138,22 @@ type RefundNotify struct {
 }
 */
 type RefundNotify struct {
-    UserId        string `json:"userId"`
-    OrderId       string `json:"orderId"`
-    TpOrderId     string `json:"tpOrderId"`
-    RefundBatchId string `json:"refundBatchId"`
-    RefundStatus  string `json:"refundStatus"`
-    RsaSign       string `json:"rsaSign"`
+	UserId        string `json:"userId"`
+	OrderId       string `json:"orderId"`
+	TpOrderId     string `json:"tpOrderId"`
+	RefundBatchId string `json:"refundBatchId"`
+	RefundStatus  string `json:"refundStatus"`
+	RsaSign       string `json:"rsaSign"`
 }
 
 // 通过 values 填充自己
 func (res *RefundNotify) Filled(values url.Values) {
-    res.UserId = values.Get("userId")
-    res.OrderId = values.Get("orderId")
-    res.TpOrderId = values.Get("tpOrderId")
-    res.RefundBatchId = values.Get("refundBatchId")
-    res.RefundStatus = values.Get("refundStatus")
-    res.RsaSign = values.Get("rsaSign")
+	res.UserId = values.Get("userId")
+	res.OrderId = values.Get("orderId")
+	res.TpOrderId = values.Get("tpOrderId")
+	res.RefundBatchId = values.Get("refundBatchId")
+	res.RefundStatus = values.Get("refundStatus")
+	res.RsaSign = values.Get("rsaSign")
 }
 
 //
