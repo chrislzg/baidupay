@@ -25,11 +25,12 @@ type Client interface {
 }
 
 type PayConfig struct {
-	DealID     string `json:"deal_id"`
-	AppID      string `json:"app_id"`
-	AppKey     string `json:"app_key"`
-	PrivateKey []byte `json:"private_key"`
-	PublicKey  []byte `json:"public_key"`
+	DealID               string `json:"deal_id"`
+	AppID                string `json:"app_id"`
+	AppKey               string `json:"app_key"`
+	PrivateKey           []byte `json:"private_key"`
+	PublicKey            []byte `json:"public_key"`
+	PlatformRsaPublicKey []byte `json:"platform_rsa_public_key"`
 
 	WhiteClientIP []string `json:"white_client_ip"`
 	DebugMode     bool     `json:"debug_mode"`
@@ -38,10 +39,11 @@ type PayConfig struct {
 
 func NewClient(conf *PayConfig) (Client, error) {
 	c := &ecommerce.PayClient{
-		DealID:     conf.DealID,
-		AppKey:     conf.AppKey,
-		PrivateKey: conf.PrivateKey,
-		PublicKey:  conf.PublicKey,
+		DealID:               conf.DealID,
+		AppKey:               conf.AppKey,
+		PrivateKey:           conf.PrivateKey,
+		PlatformRsaPublicKey: conf.PlatformRsaPublicKey,
+		PublicKey:            conf.PublicKey,
 	}
 	return c, nil
 }

@@ -11,10 +11,11 @@ import (
 )
 
 type PayClient struct {
-	DealID     string
-	AppKey     string
-	PrivateKey []byte
-	PublicKey  []byte
+	DealID               string
+	AppKey               string
+	PrivateKey           []byte
+	PublicKey            []byte
+	PlatformRsaPublicKey []byte
 	// ip白名单，回调校验
 	WhiteClientIP map[string]bool
 
