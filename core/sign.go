@@ -33,6 +33,11 @@ type SignatureStruct interface {
 func Sign(v SignatureStruct, rsaPrivateKey []byte) (string, error) {
 	fieldMap := v.FieldMap()
 	plainText := BuildSignatureString(fieldMap)
+	plainText, err := url.QueryUnescape(plainText)
+	if err != nil {
+		return "", err
+	}
+
 	block, _ := pem.Decode(rsaPrivateKey)
 	if block == nil {
 		return "", ErrBadPem
