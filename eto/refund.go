@@ -68,8 +68,8 @@ func (m *ApplyOrderRefundReq) FieldForm() url.Values {
 }
 
 type ApplyOrderRefundResp struct {
-	RefundBatchId  string `json:"refund_batch_id"`
-	RefundPayMoney string `json:"refund_pay_money"`
+	RefundBatchId  string `json:"refundBatchId"`
+	RefundPayMoney string `json:"refundPayMoney"`
 }
 
 /*
