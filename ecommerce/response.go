@@ -52,7 +52,12 @@ func (c *PayClient) validCallback(values url.Values) bool {
 	sign := values.Get("rsaSign")
 	values.Del("rsaSign")
 
-	signErr := core.CheckSign(values.Encode(), sign, c.PlatformRsaPublicKey)
+	originalData, err := url.QueryUnescape(values.Encode())
+	if err != nil {
+		return false
+	}
+
+	signErr := core.CheckSign(originalData, sign, c.PlatformRsaPublicKey)
 	if signErr != nil {
 		return false
 	}
@@ -66,6 +71,10 @@ func (c *PayClient) VerifyNotify(body []byte) error {
 		return err
 	}
 	plainString := core.BuildSignatureString(fieldMap)
+	plainString, err = url.QueryUnescape(plainString)
+	if err != nil{
+		return err
+	}
 	sign := fieldMap["rsaSign"].(string)
 	return core.CheckSign(plainString, sign, c.PlatformRsaPublicKey)
 }
