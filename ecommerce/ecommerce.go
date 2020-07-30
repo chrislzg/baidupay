@@ -58,5 +58,5 @@ func (c *PayClient) doRequestPostForm(requestData core.SignatureStruct, iUrl cor
 			Msg:   respData.Msg,
 		}
 	}
-	return body, nil
+	return respData.Data, nil
 }
